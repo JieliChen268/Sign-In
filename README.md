@@ -14,7 +14,7 @@ In this project we made design & environment analysis and comparsion before desi
 ## Installation instructions
 Fork the repo then clone it to your local machine.
 ```
-git clone https://github.com/<your username>/toro-net.git
+git clone https://github.com/<your username>/sign-in.git
 ```
 
 Change your directory into the dir on your VirtualBox Ubuntu virtual machine.  
@@ -70,7 +70,6 @@ The visitors and admin data are stored in mongoDB. The back end creates many end
 
 
 ## Deployment
-![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/Home.png)
 ![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/signin.png)
 ![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/AdminLogin.png)
 ![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/visitorList.png)
