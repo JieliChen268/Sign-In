@@ -1,8 +1,8 @@
 <template>
 <div>
 
-<div class="container" v-if="this.$store.state.user.username"> 
-  <h4>Welcome Admin! Please find the list of users below.</h4>
+  <h4>Admin View</h4>
+  <h4>Visitor List</h4>
   <!-- <a href='' @click="pagination(1)"> Switch to Page view </a> -->
   <a href="/logout">Logout</a> 
   <div v-if="this.pagenum>0">
@@ -35,26 +35,6 @@
    </tr>
   <!--  <infinite-loading @infinite="infiniteHandler"  ></infinite-loading> -->
 </table>
-
-
-</div>
-<div class="container" v-else>
-<h4> Role Admin <br><br> <a href="/register-admin"> Create Admin Account</a></h4>
-
-  <form method="post" action="/auth/local">
-
- <div class="form-group">
-      <input type="text" class="form-control" v-validate="'required'" placeholder="username" v-model="username" name="username">
-       <p class="text-danger" align="left" v-if="errors.has('username')">{{ errors.first('username') }}</p>
-</div>
-
-  <div class="form-group" >
-          <input v-model="email" name="email" v-validate="'required|email'" data-vv-delay="500" type="text" data-vv-as="email address" placeholder="Email" class="form-control">
-          <p class="text-danger" align="left" v-if="errors.has('email')">{{ errors.first('email') }}</p>
-  </div>
-
-  <button class="btn btn-success" type="submit">Login</button>
-  </form>
 
 </div>
 
@@ -111,10 +91,10 @@ export default {
   },
   mounted() {
     console.log("getting users")
-    axios.get("http://localhost:3000/admin/list/allusers")
+    axios.get("/admin/list/allusers")
     .then((res) => {
       this.users=res.data
-      console.log("Axios has retrieved these users")
+      console.log("Axios has retrieved these users") 
       console.log(res.data)
     })
     .catch((err) => {
@@ -124,7 +104,7 @@ export default {
   },
   updated(){
     console.log("getting users")
-    axios.get("http://localhost:3000/admin/list/allusers")
+    axios.get("/admin/list/allusers")
     .then((res) => {
       this.users=res.data
       console.log("Axios has retrieved these users")

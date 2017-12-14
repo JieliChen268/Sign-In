@@ -164,7 +164,7 @@ export default {
   },
   
   mounted() {
-    axios.get('http://toritos.tk/posts')
+    axios.get('/posts')
       .then((response) => {
       console.log(response.data);
       this.posts = response.data;
@@ -176,7 +176,7 @@ export default {
   },  
 
   updated(){
-    axios.get('http://toritos.tk/posts')
+    axios.get('/posts')
       .then((response) => {
       console.log(response.data);
       this.posts = response.data;

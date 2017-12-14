@@ -12,8 +12,10 @@ import App from './components/App.vue'
 import Home from './components/Home.vue'
 import Counter from './components/Counter.vue'
 import Login from './components/Login.vue'
+import RegisterAdmin from './components/RegisterAdmin.vue'
 import Register from './components/Register.vue'
 import ForgotPassword from './components/ForgotPassword.vue'
+import Table from './components/Table.vue'
 import { Validator } from 'vee-validate';
 const router = new VueRouter({
   mode: 'history',
@@ -22,6 +24,8 @@ const router = new VueRouter({
     { path: '/counter', component: Counter },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
+    { path: '/register-admin', component: RegisterAdmin},
+    { path: '/admin-view', component: Table},
     { path: '/forgot_password', component: ForgotPassword}
   ]
 })

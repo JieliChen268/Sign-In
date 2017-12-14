@@ -1,14 +1,12 @@
 const express = require('express'),
-flash = require('req-flash'),
 User = require('../models/user'),
-users = require('./users'),
-posts = require('./posts'),
+AdminUser = require('../models/adminUser'),
 bcrypt = require('bcryptjs')
 
 /* apoc require statement must always go after the explicit loading of the 
 * .env file */
 require('dotenv').load()
-const apoc = require('apoc')
+
 
 module.exports = (() => {
 'use strict'
@@ -16,33 +14,33 @@ var checkAuth = require('./index.js').checkAuth
 const router = express.Router()
 
 router.post('/register',(req,res) => {
+  console.log("inside admin registration");
+  console.log(req.body.username)
+  console.log(req.body.password)
   bcrypt.hash(req.body.password, 10, function(err, hash) {
     if (err) {
       res.status(499).send()
     }
     else {
       
-      const newUser = new User({
-        displayName: req.body.displayName,
-        email: req.body.email,
+      const newAdmin = new AdminUser({
+        
         username: req.body.username,
-        password: hash, // Hash, not plain!
-        createdOn: new Date,
-        isAdmin: true
+        password: req.body.password
       })
 
-      User.create(newUser, (err) => {
+      AdminUser.create(newAdmin, (err) => {
         if(err)
         throw err;
       
       })
-      res.status(200).send()
+      res.redirect("/admin")
     }
   })
 })
 
-/* User listing endpoint. */
-router.get('/list/allusers',checkAuth, (req,res) => {
+/* All Users listing endpoint. */
+router.get('/list/allusers', (req,res) => {
     User.find({}, function(err,users) {
       if (err) throw err
       else {
@@ -52,11 +50,29 @@ router.get('/list/allusers',checkAuth, (req,res) => {
           })
         res.send(JSON.stringify(userMap))         
       }
+    }) 
+  })
+
+  /* User listing by pageination */
+
+
+router.get('/list/users/:id', (req,res) => {
+    User.find({}, function(err,users) {
+      if (err) throw err
+      else {
+        const userMap = {}
+        console.log("backend pagination method called")
+        var last_user = req.params.id*10;
+       // res.send(JSON.stringify(users[0]._id));
+          for(var i=last_user-10;i<last_user;i++) {
+            //var key= users[i]._id
+            userMap[i] = users[i];
+          }
+        res.send(JSON.stringify(userMap))         
+      }
     })
   })
 
-  router.use('/users',users)
-  router.use('/posts',posts)
 
 
   return router

@@ -1,6 +1,17 @@
-# Toro Net
+# Sign In Application
+  The sign-in application is a simple front-end application that runs on a mobile device, e.g., an iPad or an Android tablet that communicated with a back-end database. This application is used as a kiosk device to collect information on visitors for a corporation. 
 
-## Getting started with VirtualBox
+## Non-functional requirement
+
+**Tools and Technologies**
+In this project we made design & environment analysis and comparsion before design  according to some criterias like skills, features, constraints, usability, security and complexity. Here are tools we selected: 
+
+- vue.js (front-end)
+- node.js (back-end)
+- mongoDB (database)
+- Github (CM and PM)
+
+## Installation instructions
 Fork the repo then clone it to your local machine.
 ```
 git clone https://github.com/<your username>/toro-net.git
@@ -8,7 +19,7 @@ git clone https://github.com/<your username>/toro-net.git
 
 Change your directory into the dir on your VirtualBox Ubuntu virtual machine.  
 ```
-cd toro-net
+cd sign-in
 ```
 
 Create .env file. Add a `.env` file with your PORT, MONGO_URI, 
@@ -40,15 +51,23 @@ $ ./bin/frun-front-end.sh &
 ```
 
 
-
-Update neo4j's default password:
-```
-http://localhost:7474
-Fill in username:password with neo4j:neo4j
-Change password to "admin" (or whatever, just make sure to update it in .env file)
-```
 **WAIT 2 MINUTES FOR NEO4J TO BECOME READY.**
 
-Open a new terminal window and navigate to toro-net.  
+Open a new terminal window and navigate to Sign In App.  
 
 Open http://localhost:3000 in any web browser.
+
+
+## Architecture discussion
+The visitors and admin data are stored in mongoDB. The back end creates many endpoints of API to get the visitors' data from front end. Only the back end API communicates to the database. The VueJS is used as an interface for visitors to sign in and for admin to check all the visitors. 
+
+## Plan of action
+- [x] Nonfunctional analysis
+- [X] Architecture design
+- [X] Implementation 
+- [X] Test
+- [X] Deployment
+
+
+## Deployment
+![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/sign-in-page.png)

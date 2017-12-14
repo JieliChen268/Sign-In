@@ -1,59 +1,79 @@
 <template>
-  <div class="container">
-  <div v-if="!this.$store.state.user.displayName">
+<div>
+<div class="col-xs-2 col-md-2 "></div>
+  <div class="container" class="col-xs-8 col-md-8">
+ 
    <form id="register" @submit.prevent="Validate" method="post" action='/users'>
-    <div class="form-group">
-      <input type="text" class="form-control" v-validate="'required'" placeholder="Display name" v-model="displayName" name="displayName">
-       <p class="text-danger" align="left" v-if="errors.has('displayName')">{{ errors.first('displayName') }}</p>
+   <div class="row top10">
+    <div class="form-group" class="col-xs-12 col-md-12">
+      <input type="text" class="form-control" v-validate="'required'" placeholder="Name" v-model="name" name="name">
+       <p class="text-danger" align="left" v-if="errors.has('name')">{{ errors.first('name') }}</p>
+    </div> 
     </div>
-    <div class="form-group">
-      <input type="text" class="form-control" v-validate="'required'" placeholder="Username" v-model="username" name="username">
-       <p class="text-danger" align="left" v-if="errors.has('username')">{{ errors.first('username') }}</p>
-    </div>
-     <div class="form-group" >
-          <input v-model="email" name="email" v-validate="'required|email'" data-vv-delay="500" type="text" data-vv-as="email address" placeholder="Email" class="form-control">
+    <div class="row top10">
+     <div class="form-group" class="col-xs-12 col-md-12">
+          <input v-model="email" name="email" v-validate="'required|email'" data-vv-delay="500" type="text" data-vv-as="email address" placeholder="Email Address" class="form-control">
           <p class="text-danger" align="left" v-if="errors.has('email')">{{ errors.first('email') }}</p>
     </div>
-
-    <div class="form-group"><div class="question">Question: When you were young, what did you want to be when you grew up?</div>
-      <input type="text" class="form-control" v-validate="'required'" placeholder="Answer" v-model="question1" name="question1">
-       <p class="text-danger" align="left" v-if="errors.has('question1')">{{ errors.first('question1') }}</p>
     </div>
-    <div class="form-group"><div class="question">Question: Who was your childhood hero?</div>
-      <input type="text" class="form-control" v-validate="'required'" placeholder="Answer" v-model="question2" name="question2">
-       <p class="text-danger" align="left" v-if="errors.has('question2')">{{ errors.first('question2') }}</p>
+    <div class="row top10">
+    <div class="form-group" class="col-xs-12 col-md-12">
+      <input type="text" class="form-control" v-validate="'required'" placeholder="Company" v-model="company" name="company">
+       <p class="text-danger" align="left" v-if="errors.has('company')">{{ errors.first('company') }}</p>
     </div>
-    <div class="form-group"><div class="question">Question: What was the last name of your favorite teacher?</div>
-      <input type="text" class="form-control" v-validate="'required'" placeholder="Answer" v-model="question3" name="question3">
-       <p class="text-danger" align="left" v-if="errors.has('question3')">{{ errors.first('question3') }}</p>
     </div>
-
-    <div class="form-group" :class="{'has-error': errors.has('password') }" >
-          <input v-model="password" name="password" v-validate.initial="{ rules: { regex: /^(?=.*[A-Za-z]+[0-9]+[!#@$*]+).{4,}$/, required: true} }" data-vv-delay="500" type="password" data-vv-as="password" placeholder="Password" class="form-control">
-          <p class="alert-danger" align="left" v-if="errors.has('password')">{{ errors.first('password') }}</p>
+    <div class="row top10">
+    <div class="form-group" class="col-xs-12 col-md-12">
+      <input type="text" class="form-control" v-validate="'required'" placeholder="Telephone" v-model="telephone" name="telephone">
+       <p class="text-danger" align="left" v-if="errors.has('telephone')">{{ errors.first('telephone') }}</p>
     </div>
-    <div class="form-group" :class="{'has-error': errors.has('passwordconf') }" >
-          <input v-model="passwordConf" name="passwordConf" v-validate.initial="'required|confirmed:password'" data-vv-delay="500" type="password" data-vv-as="password confirmation" placeholder="Password confirmation" class="form-control">
-           <p class="alert-danger" align="left" v-if="errors.has('passwordConf')">{{ errors.first('passwordConf') }}</p>
     </div>
-    <button class="btn btn-success" type="submit">Register</button>
+    <div class="row top10">
+    <div class="form-group"  class="col-xs-12 col-md-12" >
+    <div class="col-xs-push-1 col-md-push-1">
+    <input type="checkbox" class="form-control" id="isOfficialVisit"  v-model="isOfficialVisit" name="isOfficialVisit"   @click="checkOfficialVisit($event)" /> 
+    </div>
+    <div class="col-xs-push-3 col-md-push-3">
+    <label for="isOfficialVisit"  >Is it your Official Visit? </label>
+    </div>
+    <p class="text-danger" align="left" v-if="errors.has('isOfficialVisit')">{{ errors.first('isOfficialVisit') }}</p>
+    </div>
+    </div>
+   <div class="row top10">
+     <div class="form-group" class="col-xs-12 col-md-12"> 
+     <div class="col-xs-push-1 col-md-push-1">
+    <input type="checkbox" id="isEscortRequired" class="form-control"  v-model="isEscortRequired" name="isEscortRequired" @click="checkEscortRequired($event)">
+    </div>
+    <div class="col-xs-push-3 col-md-push-3">
+    <label for="isEscortRequired"> Is escort required? </label>
+    </div>
+    <p class="text-danger" align="left" v-if="errors.has('isEscortRequired')">{{ errors.first('isEscortRequired') }}</p>
+    </div>
+    </div>
+    
+     <div class="row top10" id="escort" style="display:none">
+    
+    <div class="form-group" class="col-xs-12">
+    <input type="text" class="form-control"  v-model="escortName" name="escortName" placeholder="Escort Name">
+    <p class="text-danger" align="left" v-if="errors.has('escortName')">{{ errors.first('escortName') }}</p>
+    </div>
+    </div>
+    <div class="row top10">
+    <button class="btn btn-success" type="submit">Signin</button>
+    <!--  on-click=location.reload() -->
+    </div>
     </form>
-    <li v-for="msg in messages">
-    <div> 
-    </div>
-    </li>
+
+
   </div>
-  </div>
-  <div v-else>
-    <h3>You cannot register while you are logged in!</h3>
-  </div>
-  </div>
+  <div class="col-xs-2 col-md-2"></div>
+ </div>
   </template>
 
 <style scoped>
 .question {
   border: 0;
-  -background: #444;
+  background: #444;
   color: black;
   text-align: left;
   
@@ -62,55 +82,90 @@
   background: #2B2B2B;
   color: white;
 }
+.top10{
+  margin-top: 5%;
+}
+.top20{
+  margin-top:20%;
+}
 </style>
 
 <script>
 export default {
-  name: 'Register',
-  
- 
+  name: 'Home',
+  data:{
+    return:{
+      isOfficialVisit:false,
+      isEscortRequired:false,
+    }
+  },
+  created(){
+      this.isOfficialVisit=false
+      this.isEscortRequired=false
+      this.escortName=""
+      console.log(this.isOfficialVisit)
+          console.log(this.isEscortRequired)
+  },
   methods: {
-
+    
+    checkOfficialVisit: function(e){
+      if(e.target.checked){
+        this.isOfficialVisit=true
+        console.log(this.isOfficialVisit)
+      }
+      else
+      this.isOfficialVisit=false
+    },
+    checkEscortRequired: function(e){
+      console.log("triggered event")
+      if(e.target.checked){
+        this.isEscortRequired=true
+         console.log(this.isEscortRequired)
+       document.getElementById('escort').style.display="block"
+         //this.$router.push('/');
+      }
+      else{
+      this.isEscortRequired=false
+      document.getElementById('escort').style.display="none"
+      }
+    },
     Validate(e) {
       e.preventDefault();
       this.$validator.validateAll().then((result) => {
         if (result){
-          
+          console.log("Calling Validation");
+          console.log(this.isOfficialVisit)
+          console.log(this.isEscortRequired)
+          console.log(this.escortName)
          const newUser = {
-            displayName: this.displayName,
-            username: this.username,
+            name: this.name,
+            company: this.company,
             email: this.email,
-            password: this.password,
-            question1: this.question1,
-          question2: this.question2,
-          question3: this.question3,
-            createdOn: new Date
+            telephone: this.telephone,
+            isOfficialVisit:this.isOfficialVisit,
+            isEscortRequired:this.isEscortRequired,
+            escortName:this.escortName
           }
-
+      console.log("Calling registerd user")
           this.$store.dispatch('registerUser', newUser)
           .then(res => {
              if (res.status == 200) {
               alert('Registration successful!')
-              this.$router.push('/login')
+              this.$router.go('/register')
             }
           }, err => {
-            alert('Registration failed!')
-            this.$router.push('/register')
+            alert('Registration failed. Please try again!')
+            this.$router.go('/register')
           })
           return
         }
-      })
-        
-         /* if(!this.errors.any()){
-            this.formSubmitted = true;
-            return
-          }*/
+      })       
         
     }
     
   },
   mounted(){
-    this.$store.dispatch(getUser);
+   
   }
 }
 </script>
