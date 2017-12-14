@@ -72,6 +72,7 @@ The visitors and admin data are stored in mongoDB. The back end creates many end
 ## Deployment
 ![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/signin.png)
 ![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/AdminLogin.png)
+![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/AdminRegister.png)
 ![alt text](https://github.com/JieliChen268/Sign-In/blob/backend/visitorList.png)
 
 
