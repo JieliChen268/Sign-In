@@ -27,7 +27,7 @@ Create .env file. Add a `.env` file with your PORT, MONGO_URI,
 
 ```
 PORT=3000
-MONGO_URI=mongodb://127.0.0.1:27017/toro-net
+MONGO_URI=mongodb://127.0.0.1:27017/sign-in
 GITHUB_ID=233245n234566kjh243f
 GITHUB_SECRET=k2hj432kjgjkh2g34kj2g4jkh23g4jk2342jhg34
 APP_URL=http://127.0.0.1:3000/
